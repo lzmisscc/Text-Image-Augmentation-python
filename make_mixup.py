@@ -1,8 +1,20 @@
 from PIL import Image
 from numpy import random
 import albumentations as A
-from image_aug import transforms
 import numpy as np
+
+transforms = [
+    # A.Affine(always_apply=True, shear=None, scale=(0.8, .9), rotate=(-5, 5)),
+    A.Perspective(always_apply=True, keep_size=True, scale=(0.01, 0.05)),
+    # A.PiecewiseAffine(always_apply=True,
+    #                   absolute_scale=False, ),
+    A.ShiftScaleRotate(always_apply=True, ),
+    A.GridDistortion(always_apply=True),
+    A.OpticalDistortion(always_apply=True),
+    A.NoOp(always_apply=True),
+    A.RandomGridShuffle(always_apply=True)
+]
+
 
 def random_localtion(x, y):
     w = x[0] - y[0]
